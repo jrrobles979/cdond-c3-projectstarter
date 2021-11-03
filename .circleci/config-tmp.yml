@@ -44,6 +44,7 @@ jobs:
           name: Build front-end
           command: |
             # Your code here
+            # exit 1
             cd frontend
             npm install
             npm run build
@@ -62,6 +63,7 @@ jobs:
           name: Back-end build
           command: |
              # Your code here
+             # exit 1
              cd frontend
              npm install
              npm run build
@@ -104,6 +106,7 @@ jobs:
   deploy-infrastructure:
     docker:
       # Docker image here that supports AWS CLI
+      - image: amazon/aws-cli
     steps:
       # Checkout code from git
       - run:
