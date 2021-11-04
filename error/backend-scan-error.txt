@@ -1,0 +1,599 @@
+
+> @nestjs/core@6.11.11 postinstall /home/circleci/project/backend/node_modules/@nestjs/core
+> opencollective || exit 0
+
+
+> nodemon@1.19.4 postinstall /home/circleci/project/backend/node_modules/nodemon
+> node bin/postinstall || exit 0
+
+Love nodemon? You can now support the project via the open collective:
+ > https://opencollective.com/nodemon/donate
+
+npm WARN glee2@1.0.0 No repository field.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.12 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.12: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
+added 1371 packages from 1082 contributors and audited 1449 packages in 42.22s
+
+32 packages are looking for funding
+  run `npm fund` for details
+
+found 457 vulnerabilities (2 low, 99 moderate, 305 high, 51 critical)
+  run `npm audit fix` to fix them, or `npm audit` for details
+npm WARN using --force I sure hope you know what you are doing.
+
+> nodemon@2.0.14 postinstall /home/circleci/project/backend/node_modules/nodemon
+> node bin/postinstall || exit 0
+
+npm WARN @nestjs/core@6.11.11 requires a peer of @nestjs/common@^6.0.0 but none is installed. You must install peer dependencies yourself.
+npm WARN @nestjs/cqrs@6.1.0 requires a peer of @nestjs/common@^6.0.0 but none is installed. You must install peer dependencies yourself.
+npm WARN @nestjs/cqrs@6.1.0 requires a peer of reflect-metadata@0.1.12 but none is installed. You must install peer dependencies yourself.
+npm WARN @nestjs/jwt@6.0.0 requires a peer of @nestjs/common@^6.0.0 but none is installed. You must install peer dependencies yourself.
+npm WARN @nestjs/passport@6.2.0 requires a peer of @nestjs/common@^6.0.0 but none is installed. You must install peer dependencies yourself.
+npm WARN @nestjs/platform-express@6.11.11 requires a peer of @nestjs/common@^6.0.0 but none is installed. You must install peer dependencies yourself.
+npm WARN @nestjs/testing@6.11.11 requires a peer of @nestjs/common@^6.0.0 but none is installed. You must install peer dependencies yourself.
+npm WARN @nestjs/typeorm@6.3.4 requires a peer of @nestjs/common@^6.7.0 but none is installed. You must install peer dependencies yourself.
+npm WARN winston-slack-webhook@0.1.6 requires a peer of winston@2.x.x but none is installed. You must install peer dependencies yourself.
+npm WARN @nestjs/swagger@5.1.4 requires a peer of @nestjs/core@^8.0.0 but none is installed. You must install peer dependencies yourself.
+npm WARN @nestjs/common@8.1.2 requires a peer of rxjs@^7.1.0 but none is installed. You must install peer dependencies yourself.
+npm WARN ajv-keywords@3.5.2 requires a peer of ajv@^6.9.1 but none is installed. You must install peer dependencies yourself.
+npm WARN glee2@1.0.0 No repository field.
+
++ standard-version@9.3.2
++ class-transformer@0.4.0
++ jest@27.3.1
++ @types/jest@27.0.2
++ webpack@5.61.0
++ typeorm@0.2.38
++ nodemon@2.0.14
++ webpack-cli@4.9.1
++ ts-jest@27.0.7
++ express-jwt@6.1.0
++ @nestjs/swagger@5.1.4
++ @nestjs/common@8.1.2
+added 335 packages from 162 contributors, removed 421 packages, updated 274 packages and moved 13 packages in 45.538s
+
+48 packages are looking for funding
+  run `npm fund` for details
+
+fixed 455 of 457 vulnerabilities in 1449 scanned packages
+  2 vulnerabilities required manual review and could not be updated
+  10 package updates for 165 vulnerabilities involved breaking changes
+  (installed due to `--force` option)
+                                                                                
+                       === npm audit security report ===                        
+                                                                                
+# Run  npm install --save-dev ts-loader@9.2.6  to resolve 12 vulnerabilities
+SEMVER WARNING: Recommended action is a potentially breaking change
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Prototype Pollution in set-value                             │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ set-value                                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > snapdragon > base > cache-base >    │
+│               │ set-value                                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-4jqc-8m5r-9rpr            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Prototype Pollution in set-value                             │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ set-value                                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > braces > snapdragon > base >        │
+│               │ cache-base > set-value                                       │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-4jqc-8m5r-9rpr            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Prototype Pollution in set-value                             │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ set-value                                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > extglob > expand-brackets >         │
+│               │ snapdragon > base > cache-base > set-value                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-4jqc-8m5r-9rpr            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Prototype Pollution in set-value                             │
+├───────────────┼─────────────────────────────────────────────────────────────��┤
+│ Package       │ set-value                                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > snapdragon > base > cache-base >    │
+│               │ union-value > set-value                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-4jqc-8m5r-9rpr            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Prototype Pollution in set-value                             │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ set-value                                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > braces > snapdragon > base >        │
+│               │ cache-base > union-value > set-value                         │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-4jqc-8m5r-9rpr            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Prototype Pollution in set-value                             │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ set-value                                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > extglob > expand-brackets >         │
+│               │ snapdragon > base > cache-base > union-value > set-value     │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-4jqc-8m5r-9rpr            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Critical      │ Prototype Pollution in set-value                             │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ set-value                                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > snapdragon > base > cache-base >    │
+│               │ set-value                                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-4g88-fppr-53pp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Critical      │ Prototype Pollution in set-value                             │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ set-value                                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > braces > snapdragon > base >        │
+│               │ cache-base > set-value                                       │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-4g88-fppr-53pp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Critical      │ Prototype Pollution in set-value                             │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ set-value                                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > extglob > expand-brackets >         │
+│               │ snapdragon > base > cache-base > set-value                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-4g88-fppr-53pp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Critical      │ Prototype Pollution in set-value                             │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ set-value                                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > snapdragon > base > cache-base >    │
+│               │ union-value > set-value                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-4g88-fppr-53pp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Critical      │ Prototype Pollution in set-value                             │
+├──────────���────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ set-value                                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > braces > snapdragon > base >        │
+│               │ cache-base > union-value > set-value                         │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-4g88-fppr-53pp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Critical      │ Prototype Pollution in set-value                             │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ set-value                                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > extglob > expand-brackets >         │
+│               │ snapdragon > base > cache-base > union-value > set-value     │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-4g88-fppr-53pp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+# Run  npm update path-parse --depth 10  to resolve 8 vulnerabilities
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Moderate      │ Regular Expression Denial of Service in path-parse           │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ path-parse                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ tslint [dev]                                                 │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ tslint > resolve > path-parse                                │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-hj48-42vr-x3v9            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Moderate      │ Regular Expression Denial of Service in path-parse           │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ path-parse                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ webpack-cli [dev]                                            │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ webpack-cli > rechoir > resolve > path-parse                 │
+├────���──────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-hj48-42vr-x3v9            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Moderate      │ Regular Expression Denial of Service in path-parse           │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ path-parse                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ jest [dev]                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ jest > @jest/core > jest-resolve > resolve > path-parse      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-hj48-42vr-x3v9            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Moderate      │ Regular Expression Denial of Service in path-parse           │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ path-parse                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ jest [dev]                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ jest > @jest/core > @jest/reporters > jest-resolve > resolve │
+│               │ > path-parse                                                 │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-hj48-42vr-x3v9            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Moderate      │ Regular Expression Denial of Service in path-parse           │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ path-parse                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ jest [dev]                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ jest > jest-cli > @jest/core > @jest/reporters >             │
+│               │ jest-resolve > resolve > path-parse                          │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-hj48-42vr-x3v9            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Moderate      │ Regular Expression Denial of Service in path-parse           │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ path-parse                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ jest [dev]                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ jest > @jest/core > jest-config > @jest/test-sequencer >     │
+│               │ jest-runtime > jest-resolve > resolve > path-parse           │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-hj48-42vr-x3v9            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Moderate      │ Regular Expression Denial of Service in path-parse           │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ path-parse                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ jest [dev]                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ jest > jest-cli > @jest/core > jest-config >                 │
+│               │ @jest/test-sequencer > jest-runtime > jest-resolve > resolve │
+│               │ > path-parse                                                 │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-hj48-42vr-x3v9            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Moderate      │ Regular Expression Denial of Service in path-parse           │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ path-parse                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ jest [dev]                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ jest > jest-cli > @jest/core > jest-config >                 │
+│               │ @jest/test-sequencer > jest-runtime > jest-snapshot >        │
+│               │ jest-resolve > resolve > path-parse                          │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-hj48-42vr-x3v9            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+# Run  npm update kind-of --depth 10  to resolve 12 vulnerabilities
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Validation Bypass in kind-of                                 │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ kind-of                                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼─────────────────────────────────���────────────────────────────┤
+│ Path          │ ts-loader > micromatch > snapdragon > base > define-property │
+│               │ > is-descriptor > kind-of                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-6c8f-qphg-qjgp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Validation Bypass in kind-of                                 │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ kind-of                                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > snapdragon > base > define-property │
+│               │ > is-descriptor > is-accessor-descriptor > kind-of           │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-6c8f-qphg-qjgp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Validation Bypass in kind-of                                 │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ kind-of                                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > braces > snapdragon > base >        │
+│               │ define-property > is-descriptor > is-accessor-descriptor >   │
+│               │ kind-of                                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-6c8f-qphg-qjgp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Validation Bypass in kind-of                                 │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ kind-of                                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > extglob > expand-brackets >         │
+│               │ snapdragon > base > define-property > is-descriptor >        │
+│               │ is-accessor-descriptor > kind-of                             │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-6c8f-qphg-qjgp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Validation Bypass in kind-of                                 │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ kind-of                                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > braces > snapdragon-node >          │
+│               │ define-property > is-descriptor > kind-of                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-6c8f-qphg-qjgp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Validation Bypass in kind-of                                 │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ kind-of                                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > braces > snapdragon-node >          │
+│               │ define-property > is-descriptor > is-accessor-descriptor >   │
+│               │ kind-of                                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-6c8f-qphg-qjgp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Validation Bypass in kind-of                                 │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ kind-of                                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > define-property > is-descriptor >   │
+│               │ kind-of                                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-6c8f-qphg-qjgp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Validation Bypass in kind-of                                 │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ kind-of                                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > define-property > is-descriptor >   │
+│               │ is-accessor-descriptor > kind-of                             │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-6c8f-qphg-qjgp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Validation Bypass in kind-of                                 │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ kind-of                                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > to-regex > define-property >        │
+│               │ is-descriptor > is-accessor-descriptor > kind-of             │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-6c8f-qphg-qjgp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Validation Bypass in kind-of                                 │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ kind-of                                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > braces > to-regex > define-property │
+│               │ > is-descriptor > is-accessor-descriptor > kind-of           │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-6c8f-qphg-qjgp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Validation Bypass in kind-of                                 │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ kind-of                                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > extglob > expand-brackets >         │
+│               │ to-regex > define-property > is-descriptor >                 │
+│               │ is-accessor-descriptor > kind-of                             │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-6c8f-qphg-qjgp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ High          │ Validation Bypass in kind-of                                 │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ kind-of                                                      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > nanomatch > kind-of                 │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-6c8f-qphg-qjgp            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+# Run  npm update mixin-deep --depth 7  to resolve 3 vulnerabilities
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Critical      │ Prototype Pollution in mixin-deep                            │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ mixin-deep                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > snapdragon > base > mixin-deep      │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-fhjf-83wg-r2j9            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Critical      │ Prototype Pollution in mixin-deep                            │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ mixin-deep                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > braces > snapdragon > base >        │
+│               │ mixin-deep                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-fhjf-83wg-r2j9            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Critical      │ Prototype Pollution in mixin-deep                            │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ mixin-deep                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ ts-loader [dev]                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ ts-loader > micromatch > extglob > expand-brackets >         │
+│               │ snapdragon > base > mixin-deep                               │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-fhjf-83wg-r2j9            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                                Manual Review                                 │
+│            Some vulnerabilities require your attention to resolve            │
+│                                                                              │
+│         Visit https://go.npm.me/audit-guide for additional guidance          │
+└──────────────────────────────────────────────────────────────────────────────┘
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Moderate      │ SQL Injection and Cross-site Scripting in class-validator    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ class-validator                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Patched in    │ No patch available                                           │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ class-validator                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ class-validator                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-fj58-h2fr-3pp2            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Moderate      │ Inefficient Regular Expression Complexity in validator.js    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ validator                                                    │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Patched in    │ >=13.7.0                                                     │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ class-validator                                              │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ class-validator > validator                                  │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://github.com/advisories/GHSA-qgmg-gppg-76g5            │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+found 37 vulnerabilities (10 moderate, 18 high, 9 critical) in 1292 scanned packages
+  run `npm audit fix` to fix 23 of them.
+  12 vulnerabilities require semver-major dependency updates.
+  2 vulnerabilities require manual review. See the full report for details.
+
+Exited with code exit status 1
