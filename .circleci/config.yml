@@ -180,8 +180,10 @@ jobs:
             paths:
               - project/.circleci/ansible/inventory.txt
       # Here's where you will add some code to rollback on failure     
-        - on_fail:
-          - destroy-environment
+        - run:
+            name: on error
+            command: destroy-environment
+            when: on_fail
 
 
 workflows:
