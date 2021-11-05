@@ -182,7 +182,7 @@ jobs:
       # Here's where you will add some code to rollback on failure     
         - run:
             name: on error
-            command: destroy-environment
+            command: Destroy environments
             when: on_fail
 
 
