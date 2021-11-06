@@ -207,6 +207,12 @@ jobs:
               # Your code here
               apk add --update ansible
         - run:
+            name: Ping server
+            command: |
+              # Your code here               
+              ansible HOST -i .circleci/ansible/inventory.txt -m ping -vvvvv           
+              
+        - run:
             name: Configure server
             command: |
               # Your code here 
