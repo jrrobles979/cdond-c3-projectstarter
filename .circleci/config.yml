@@ -178,8 +178,8 @@ jobs:
               # Your code here
               aws ec2 describe-instances \
                 --query 'Reservations[*].Instances[*].PublicIpAddress' \
-                --output text >> .circleci/files/inventory.txt
-              echo `cat .circleci/files/inventory.txt`      
+                --output text >> .circleci/ansible/inventory.txt
+              echo `cat .circleci/ansible/inventory.txt`      
         - persist_to_workspace:
             root: ~/
             paths:
@@ -209,9 +209,8 @@ jobs:
       - run:
           name: Configure server
           command: |
-            # Your code here
-            echo `cat .circleci/files/inventory.txt` 
-            echo `pwd`
+            # Your code here            
+            echo `cat .circleci/ansible/inventory.txt`            
             ansible-playbook -i .circleci/ansible/inventory.txt .circleci/ansible/configure-server.yml
       # Here's where you will add some code to rollback on failure   
       - destroy-environment:
