@@ -181,7 +181,7 @@ jobs:
                 --output text >> .circleci/ansible/inventory.txt
               echo `cat .circleci/ansible/inventory.txt`      
         - persist_to_workspace:
-            root: ~/
+            root: /tmp/workspace
             paths:
               - project/.circleci/ansible/inventory.txt
       # Here's where you will add some code to rollback on failure     
@@ -200,12 +200,16 @@ jobs:
       - add_ssh_keys:
           fingerprints: ["72:8a:d6:7d:e0:86:9c:9b:3c:14:49:c8:d0:65:04:db"] 
       - attach_workspace:
-          at: ~/
+          at: /tmp/workspace
       - run:
           name: Install dependencies
           command: |
             # Your code here
             apk add --update ansible
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
+            aws --version
       - run:
           name: Configure server
           command: |
