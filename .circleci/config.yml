@@ -210,7 +210,7 @@ jobs:
             name: Ping server
             command: |
               # Your code here               
-              ansible HOST -i .circleci/ansible/inventory.txt -m ping -vvvvv           
+              ansible web -i .circleci/ansible/inventory.txt -m ping -vvvvv           
               
         - run:
             name: Configure server
