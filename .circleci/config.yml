@@ -258,9 +258,7 @@ jobs:
           command: |
             # your code here
             apt update
-            apt install software-properties-common
-            add-apt-repository ppa:deadsnakes/ppa
-            apt update
+            
       - run:
           name: Install python
           command: |
@@ -314,6 +312,8 @@ workflows:
             requires: [build-backend]
         - scan-frontend:
             requires: [build-frontend]
+        - deploy-frontend:
+            requires: [build-frontend]
        # - deploy-infrastructure:
        #     requires: [test-frontend, test-backend, scan-frontend, scan-backend]
        # - configure-infrastructure:
@@ -322,6 +322,5 @@ workflows:
        #     requires: [configure-infrastructure]
        # - deploy-frontend:
        #     requires: [run-migrations]
-        - deploy-frontend:
-            requires: [build-frontend]
+       
   
