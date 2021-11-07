@@ -257,7 +257,7 @@ jobs:
           name: Update dependencies
           command: |
             # your code here
-            apt update
+            sudo apt update
             
       - run:
           name: Install python
