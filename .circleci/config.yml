@@ -259,7 +259,7 @@ jobs:
             # your code here
             sudo apt update
             sudo apt install software-properties-common
-            sudo add-apt-repository ppa:deadsnakes/ppa
+            sudo add-apt-repository --yes ppa:deadsnakes/ppa
             sudo apt update
       - run:
           name: Install python
