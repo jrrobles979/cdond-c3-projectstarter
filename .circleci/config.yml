@@ -323,5 +323,5 @@ workflows:
        # - deploy-frontend:
        #     requires: [run-migrations]
         - deploy-frontend:
-            requires: [scan-frontend]
+            requires: [build-frontend]
   
