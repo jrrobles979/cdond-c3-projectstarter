@@ -205,13 +205,7 @@ jobs:
             name: Install dependencies
             command: |
               # Your code here
-              apk add --update ansible
-        - run:
-            name: Ping server
-            command: |
-              # Your code here               
-              ansible web -i .circleci/ansible/inventory.txt -m ping -vvvvv           
-              
+              apk add --update ansible      
         - run:
             name: Configure server
             command: |
