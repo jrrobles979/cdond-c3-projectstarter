@@ -16,11 +16,15 @@ commands:
             aws cloudformation delete-stack --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}"
 
   revert-migrations:
-    description: Revert the last migration if successfully run in the current workflow.   
+    description: Revert the last migration if successfully run in the current workflow.  
+    parameters:
+      event:
+        type: string 
     steps:
       - run:
           name: Revert migrations
           # Add when this will run
+          when: << parameters.event >>
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
             SUCCESS = 1
@@ -261,6 +265,7 @@ jobs:
             sudo apt install software-properties-common
             sudo add-apt-repository --yes ppa:deadsnakes/ppa
             sudo apt update
+            
       - run:
           name: Install python
           command: |
@@ -296,14 +301,26 @@ jobs:
           name: Get backend url
           command: |
             # your code here
+            export BACKEND_IP=$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress')
             export API_URL="http://${BACKEND_IP}:3030"
             echo "${API_URL}"
+            echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
+            cat frontend/.env
+            
       - run:
           name: Deploy frontend objects
           command: |
             # your code here
-      # Here's where you will add some code to rollback on failure   
-
+            cd frontend
+            npm install
+            npm run build
+            tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
+            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
+      # Here's where you will add some code to rollback on failure  
+      - revert-migrations:
+          event: on_fail
+      - destroy-environment:
+          event: on_fail
 
 workflows:
   default:
@@ -318,15 +335,13 @@ workflows:
             requires: [build-backend]
         - scan-frontend:
             requires: [build-frontend]
+        - deploy-infrastructure:
+            requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+        - configure-infrastructure:
+            requires: [deploy-infrastructure]
+        - run-migrations:
+            requires: [configure-infrastructure]
         - deploy-frontend:
-            requires: [build-frontend]
-       # - deploy-infrastructure:
-       #     requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-       # - configure-infrastructure:
-       #     requires: [deploy-infrastructure]
-       # - run-migrations:
-       #     requires: [configure-infrastructure]
-       # - deploy-frontend:
-       #     requires: [run-migrations]
+            requires: [run-migrations]
        
   
