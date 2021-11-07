@@ -263,19 +263,19 @@ jobs:
           name: Install python
           command: |
             # your code here
-            apt install python3.8
+            sudo apt install python3.8
 
       - run:
           name: Install ansible
           command: |
             # your code here
-            apt install ansible
+            sudo apt install ansible
 
       - run:
           name: Install node
           command: |
             # your code here
-            apt install nodejs
+            sudo apt install nodejs
             node --version
             npm --version
       - run:
@@ -284,7 +284,7 @@ jobs:
             # your code here
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
-            ./aws/install
+            sudo ./aws/install
             aws --version
       - run:
           name: Get backend url
