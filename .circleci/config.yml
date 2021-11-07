@@ -265,7 +265,7 @@ jobs:
           name: Install python
           command: |
             # your code here
-            sudo apt install python3.8
+            sudo apt-get install python-is-python3
             python --version
 
       - run:
