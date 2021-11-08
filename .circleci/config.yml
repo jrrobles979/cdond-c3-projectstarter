@@ -360,7 +360,7 @@ jobs:
         - revert-migrations:
             event: on_fail
         - destroy-environment:
-              event: on_fail
+            event: on_fail
 workflows:
   default:
       jobs:
