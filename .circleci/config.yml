@@ -308,7 +308,7 @@ jobs:
           name: Get backend url
           command: |
             # your code here
-            export temp=$(aws ec2 describe-instances --query 'Reservations[0].Instances[0].PublicIpAddress' --filters Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7} --profile UdagramAdmin) 
+            export temp=$(aws ec2 describe-instances --query 'Reservations[0].Instances[0].PublicIpAddress' --filters Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}) 
             export temp="${temp%\"}"
             export BACKEND_IP="${temp#\"}"
             export API_URL="http://${BACKEND_IP}:3030"
