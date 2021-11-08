@@ -35,7 +35,7 @@ commands:
             #  Add revert code here. You can find this in the Getting Started section.
               exit 1
             fi
-            
+
   update-and-install-dependencies:
     description: Update and install dependencies for cimg/base:2021.04 image
     steps:
