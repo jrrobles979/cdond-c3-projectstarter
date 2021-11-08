@@ -19,7 +19,7 @@
     production: yes
     state: present
 
-- name: Testing copy of the local remote file
+- name: Testing copy of the local to remote file
   become: true
   copy:
         src: artifact.tar.gz
@@ -27,9 +27,11 @@
 
 - name: Extract artifact.tar.gz into /backend
   become: true
-  ansible.builtin.unarchive:
+  ansible.builtin.unarchive:    
     src: artifact.tar.gz
-    dest: ./backend/
+    dest: /backend/
+    creates: /backend/
+  
 
 - name: Executing node
   become: true
