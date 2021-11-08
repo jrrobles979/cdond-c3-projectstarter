@@ -27,7 +27,7 @@
 - name: Extract artifact.tar.gz into /backend
   ansible.builtin.unarchive:
     src: ./artifact.tar.gz
-    dest: /backend
+    dest: /
 
 - name: Executing node
   shell: |
