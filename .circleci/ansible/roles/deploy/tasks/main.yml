@@ -21,7 +21,7 @@
 
 - name: Testing copy of the local remote file
   copy:
-        src: /files/artifact.tar.gz
+        src: artifact.tar.gz
         dest: ./
 
 - name: Extract artifact.tar.gz into /backend
