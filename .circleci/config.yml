@@ -365,8 +365,8 @@ jobs:
       # Here's where you will add some code to rollback on failure  
         - revert-migrations:
             event: on_fail
-        - destroy-environment:
-            event: on_fail
+      #  - destroy-environment:
+      #      event: on_fail
 workflows:
   default:
       jobs:
