@@ -30,6 +30,7 @@
     dest: /
 
 - name: Executing node
+  become: true
   shell: |
     cd backend
     npm install
