@@ -25,17 +25,11 @@
         src: artifact.tar.gz
         dest: ./
 
-- name: Extract artifact.tar.gz into /backend
-  become: true
-  ansible.builtin.unarchive:    
-    src: artifact.tar.gz
-    dest: /backend/
-    creates: /backend/
-  
-
 - name: Executing node
   become: true
   shell: |
+    mkdir backend
+    tar xvzf artifact.tar.gz --directory backend
     cd backend
     npm install
     pm2 stop default
