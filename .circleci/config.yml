@@ -360,11 +360,13 @@ jobs:
       - checkout
       #- update-and-install-dependencies        
       - run:
-          name: Install node
+          name: Install aws
           command: |             
             node --version
             npm --version
-            cat /etc/os-release
+            sudo apt-get install python python-pip
+            sudo pip install awscli
+            aws --version
       - run:
           name: Get backend url
           command: |
