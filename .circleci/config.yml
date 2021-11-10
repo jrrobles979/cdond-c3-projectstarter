@@ -235,9 +235,10 @@ jobs:
             name: Configure server
             command: |
               # Your code here 
-              cd .circleci/ansible/       
-              echo $TYPEORM_HOST           
-              ansible-playbook -i inventory.txt configure-server.yml
+              #cd .circleci/ansible/       
+              #echo $TYPEORM_HOST           
+              #ansible-playbook -i inventory.txt configure-server.yml
+              return 1
         # Here's where you will add some code to rollback on failure   
         - destroy-environment:
               event: on_fail
