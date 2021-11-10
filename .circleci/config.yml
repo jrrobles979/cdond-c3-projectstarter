@@ -229,7 +229,8 @@ jobs:
               # unzip awscliv2.zip
               # ./aws/install -i /usr/local/aws -b /usr/local/bin/aws
               # aws --version        
-              pip install awscli --upgrade        
+              pip install awscli --upgrade   
+              aws --version       
         - run:
             name: Configure server
             command: |
