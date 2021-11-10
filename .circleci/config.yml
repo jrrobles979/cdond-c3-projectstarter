@@ -459,7 +459,6 @@ workflows:
   default:
       jobs:
        
-        - deploy-backend:
-            requires: [run-migrations]
+        - deploy-backend
        
        
