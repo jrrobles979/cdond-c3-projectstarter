@@ -12,11 +12,24 @@ commands:
           name: Destroy environments
           when: << parameters.event >>
           command: |
-            # Your code here            
-            aws s3 rb s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --force
+            # Your code here                        
+            # aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
             aws cloudformation delete-stack --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}"
             aws cloudformation delete-stack --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}"
 
+  emty-s3-bucket:
+    description: Clear elements from s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} 
+    parameters:
+      event:
+        type: string
+    steps:
+      - run:
+          name: Destroy environments
+          when: << parameters.event >>
+          command: |
+            # Your code here                        
+            aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
+            
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.  
     parameters:
@@ -409,25 +422,27 @@ jobs:
 workflows:
   default:
       jobs:
-        #- build-frontend
-        #- build-backend
-        #- test-frontend:
-        #    requires: [build-frontend]
-        #- test-backend:
-        #    requires: [build-backend]
-        #- scan-backend:
-        #    requires: [build-backend]
-        #- scan-frontend:
-        #    requires: [build-frontend]
-        #- deploy-infrastructure
-            #requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-        - configure-infrastructure
-        #    requires: [deploy-infrastructure]
-        #- run-migrations:
-        #    requires: [configure-infrastructure]
-        #- deploy-frontend:
-        #    requires: [run-migrations]
-        #- deploy-backend:
-        #    requires: [run-migrations]
-        #- smoke-test:
-        #    requires: [deploy-backend, deploy-frontend]
+        - build-frontend
+        - build-backend
+        - test-frontend:
+            requires: [build-frontend]
+        - test-backend:
+            requires: [build-backend]
+        - scan-backend:
+            requires: [build-backend]
+        - scan-frontend:
+            requires: [build-frontend]
+        - deploy-infrastructure:
+            requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+        - configure-infrastructure:
+            requires: [deploy-infrastructure]
+        - run-migrations:
+            requires: [configure-infrastructure]
+        - deploy-frontend:
+            requires: [run-migrations]
+        - deploy-backend:
+            requires: [run-migrations]
+        - smoke-test-backend:
+            requires: [deploy-backend]
+        - smoke-test-frontend:
+            requires: [deploy-frontend]
