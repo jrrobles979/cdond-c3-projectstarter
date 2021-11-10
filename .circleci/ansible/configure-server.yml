@@ -31,10 +31,23 @@
       become: true
       raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python3)
       changed_when: false
-     
+    
+
+    - name: check HOME by ansible_env
+      debug:
+        msg: "'{{ lookup('env', 'HOME') }}' is the HOME environment variable."
+
+    - name: check TYPEORM_HOST by ansible_env
+      debug:
+        msg: "'{{ lookup('env', 'TYPEORM_HOST')}}' is the TYPEORM_HOST environment variable."
+
+    - name: check TYPEORM_HOST
+      debug:
+        msg: "TYPEORM_HOST value is '{{ TYPEORM_HOST }}'"
+    
     - name: check ansible_env.TYPEORM_HOST by ansible_env
       debug:
-        msg: "ansible_env.TYPEORM_HOST value is {{ ansible_env.TYPEORM_HOST }}"
+        msg: "ansible_env.TYPEORM_HOST value is '{{ ansible_env.TYPEORM_HOST }}'"
 
     
 
