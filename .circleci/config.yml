@@ -290,7 +290,7 @@ jobs:
   deploy-backend:
     docker:
       # Docker image here that supports Ansible
-      - image: cimg/base:2021.04
+      - image: python:3.7-alpine3.11
     steps:
       # Checkout code from git
       # Add ssh keys with fingerprint
@@ -300,7 +300,32 @@ jobs:
             fingerprints: ["13:16:5b:27:2b:2a:74:d5:8a:da:82:61:b9:73:27:10"] 
         - attach_workspace:
             at: ~/
-        #- update-and-install-dependencies                      
+        #- update-and-install-dependencies   
+        - run:
+            name: Install dependencies
+            command: |
+              # Your code here
+              apk update
+              apk upgrade
+              apk add unzip 
+              apk add curl
+              /usr/local/bin/python -m pip install --upgrade pip                    
+        - run:
+            name: Install ansible
+            command: |
+              # your code here              
+              apk add --update ansible 
+              ansible --version
+        - run:
+            name: Install aws
+            command: |
+              # your code here              
+              # curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+              # unzip awscliv2.zip
+              # ./aws/install -i /usr/local/aws -b /usr/local/bin/aws
+              # aws --version        
+              pip install awscli --upgrade   
+              aws --version       
         - run:
             name: Deploy backend
             command: |
@@ -323,17 +348,22 @@ jobs:
       # Here's where you will add some code to rollback on failure  
         - revert-migrations:
             event: on_fail
-      #  - destroy-environment:
-      #      event: on_fail
+        - destroy-environment:
+            event: on_fail
   
   deploy-frontend:
     docker:
       # Docker image here that supports AWS CLI
-      - image: cimg/base:2021.04
+     - image: amazon/aws-cli
     steps:
       # Checkout code from git
       - checkout
-      #- update-and-install-dependencies          
+      #- update-and-install-dependencies        
+      - run:
+          name: Install node
+          command: | 
+            yum install -y gcc-c++ make 
+            curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash - 
       - run:
           name: Get backend url
           command: |
@@ -422,27 +452,7 @@ jobs:
 workflows:
   default:
       jobs:
-        - build-frontend
-        - build-backend
-        - test-frontend:
-            requires: [build-frontend]
-        - test-backend:
-            requires: [build-backend]
-        - scan-backend:
-            requires: [build-backend]
-        - scan-frontend:
-            requires: [build-frontend]
-        - deploy-infrastructure:
-            requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-        - configure-infrastructure:
-            requires: [deploy-infrastructure]
-        - run-migrations:
-            requires: [configure-infrastructure]
+        
         - deploy-frontend:
             requires: [run-migrations]
-        - deploy-backend:
-            requires: [run-migrations]
-        - smoke-test-backend:
-            requires: [deploy-backend]
-        - smoke-test-frontend:
-            requires: [deploy-frontend]
+       
