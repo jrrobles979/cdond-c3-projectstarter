@@ -400,7 +400,7 @@ jobs:
             fingerprints: ["13:16:5b:27:2b:2a:74:d5:8a:da:82:61:b9:73:27:10"] 
         - attach_workspace:
             at: ~/
-        #- update-and-install-dependencies            
+        
         - run:
             name: Get backend url
             command: |
@@ -472,6 +472,8 @@ workflows:
             requires: [run-migrations]
         - deploy-backend:
             requires: [run-migrations]
-        - smoke-test:
-            requires: [deploy-backend, deploy-frontend]
+        - smoke-test-backend:
+            requires: [deploy-backend]
+        - smoke-test-frontend:
+            requires: [deploy-frontend]
        
