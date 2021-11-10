@@ -364,6 +364,7 @@ jobs:
           command: |             
             node --version
             npm --version
+            cat /etc/os-release
       - run:
           name: Get backend url
           command: |
