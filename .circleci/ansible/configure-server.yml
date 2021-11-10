@@ -37,20 +37,8 @@
       debug:
         msg: "'{{ lookup('env', 'TYPEORM_HOST')}}' is the TYPEORM_HOST environment variable."
 
-    - name: check TYPEORM_HOST
-      debug:
-        msg: "TYPEORM_HOST value is '{{ TYPEORM_HOST }}'"
-    
     - name: check ansible_env.TYPEORM_HOST by ansible_env
-      debug:
-        msg: "ansible_env.TYPEORM_HOST value is '{{ ansible_env.TYPEORM_HOST }}'"
-
-    - name: check ansible_env.TYPEORM_HOST by ansible_env
-      debug:
-        msg: "ansible_env.TYPEORM_HOST value is '$TYPEORM_HOST'"    
-
-    
-
+      shell: "echo $TYPEORM_HOST"  
 
   roles:
     # Your code here
