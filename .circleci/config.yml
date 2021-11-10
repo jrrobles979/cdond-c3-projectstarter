@@ -357,13 +357,10 @@ jobs:
      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
-      - checkout
-      #- update-and-install-dependencies        
+      - checkout     
       - run:
           name: Install aws
-          command: |             
-            node --version
-            npm --version
+          command: |                        
             sudo apt-get install python python-pip
             sudo pip install awscli
             aws --version
@@ -395,7 +392,7 @@ jobs:
   smoke-test-backend:
     docker:
       # Lightweight Docker image 
-       - image: cimg/base:2021.04
+       - image: python:3.7-alpine3.11
     steps:
       # Checkout code from git
         - checkout
@@ -429,7 +426,7 @@ jobs:
   smoke-test-frontend:
     docker:
       # Lightweight Docker image 
-       - image: cimg/base:2021.04
+        - image: python:3.7-alpine3.11
     steps:
       # Checkout code from git
         - checkout
@@ -455,7 +452,26 @@ jobs:
 workflows:
   default:
       jobs:
-        
-        - deploy-frontend
-          #  requires: [run-migrations]
+        - build-frontend
+        - build-backend
+        - test-frontend:
+            requires: [build-frontend]
+        - test-backend:
+            requires: [build-backend]
+        - scan-backend:
+            requires: [build-backend]
+        - scan-frontend:
+            requires: [build-frontend]
+        - deploy-infrastructure:
+            requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+        - configure-infrastructure:
+            requires: [deploy-infrastructure]
+        - run-migrations:
+            requires: [configure-infrastructure]
+        - deploy-frontend:
+            requires: [run-migrations]
+        - deploy-backend:
+            requires: [run-migrations]
+        - smoke-test:
+            requires: [deploy-backend, deploy-frontend]
        
