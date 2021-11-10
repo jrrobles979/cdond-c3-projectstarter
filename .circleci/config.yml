@@ -453,6 +453,6 @@ workflows:
   default:
       jobs:
         
-        - deploy-frontend:
-            requires: [run-migrations]
+        - deploy-frontend
+          #  requires: [run-migrations]
        
