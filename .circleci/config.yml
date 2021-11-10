@@ -257,6 +257,7 @@ jobs:
             command: |
               # Your code here
               apk add --update ansible      
+              echo $TYPEORM_CONNECTION
         - run:
             name: Configure server
             command: |
