@@ -256,13 +256,13 @@ jobs:
             name: Install dependencies
             command: |
               # Your code here
-              apk add --update ansible      
-              echo $TYPEORM_CONNECTION
+              apk add --update ansible                    
         - run:
             name: Configure server
             command: |
               # Your code here 
-              cd .circleci/ansible/                  
+              cd .circleci/ansible/       
+              echo $TYPEORM_HOST           
               ansible-playbook -i inventory.txt configure-server.yml
         # Here's where you will add some code to rollback on failure   
         - destroy-environment:
