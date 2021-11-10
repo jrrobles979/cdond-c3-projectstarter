@@ -249,8 +249,7 @@ jobs:
             name: Configure server
             command: |
               # Your code here 
-              cd .circleci/ansible/       
-              echo $TYPEORM_HOST           
+              cd .circleci/ansible/ 
               ansible-playbook -i inventory.txt configure-server.yml
               
         # Here's where you will add some code to rollback on failure   
@@ -309,7 +308,14 @@ jobs:
               apk upgrade
               apk add unzip 
               apk add curl
-              /usr/local/bin/python -m pip install --upgrade pip                    
+              /usr/local/bin/python -m pip install --upgrade pip    
+        - run:
+            name: Install node
+            command: |
+              apk add --update nodejs nodejs-npm
+              node --version
+              npm --version
+
         - run:
             name: Install ansible
             command: |
@@ -452,28 +458,8 @@ jobs:
 workflows:
   default:
       jobs:
-        - build-frontend
-        - build-backend
-        - test-frontend:
-            requires: [build-frontend]
-        - test-backend:
-            requires: [build-backend]
-        - scan-backend:
-            requires: [build-backend]
-        - scan-frontend:
-            requires: [build-frontend]
-        - deploy-infrastructure:
-            requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-        - configure-infrastructure:
-            requires: [deploy-infrastructure]
-        - run-migrations:
-            requires: [configure-infrastructure]
-        - deploy-frontend:
-            requires: [run-migrations]
+       
         - deploy-backend:
             requires: [run-migrations]
-        - smoke-test-backend:
-            requires: [deploy-backend]
-        - smoke-test-frontend:
-            requires: [deploy-frontend]
+       
        
