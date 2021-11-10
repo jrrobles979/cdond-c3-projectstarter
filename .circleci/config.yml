@@ -354,16 +354,16 @@ jobs:
   deploy-frontend:
     docker:
       # Docker image here that supports AWS CLI
-     - image: amazon/aws-cli
+     - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       - checkout
       #- update-and-install-dependencies        
       - run:
           name: Install node
-          command: | 
-            yum install -y gcc-c++ make 
-            curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash - 
+          command: |             
+            node --version
+            npm --version
       - run:
           name: Get backend url
           command: |
