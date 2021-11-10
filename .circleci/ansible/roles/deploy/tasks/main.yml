@@ -3,15 +3,24 @@
   become: true
   copy:
         src: artifact.tar.gz
-        dest: ./
+        dest: /home/ubuntu
+
+- name: Creates directory
+  file:
+    path: /home/ubuntu/backend
+    state: directory
+
 - name: Extract foo.tgz into /var/lib/foo
   ansible.builtin.unarchive:
     src: artifact.tar.gz
-    dest: ./
+    dest: /backend
 
 - name: Executing node
   become: true
   shell: |   
+    cd /home/ubuntu/backend
     npm install
+    npm build
+    cd ..    
     pm2 stop default
-    pm2 start npm -- start
+    pm2 start npm --name "backend" -- start
