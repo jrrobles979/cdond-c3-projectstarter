@@ -211,15 +211,24 @@ jobs:
             name: Install dependencies
             command: |
               # Your code here
-              apk add --update ansible
+              apk update
+              apk upgrade
+              apk add unzip 
+              apk add curl                    
+        - run:
+            name: Install ansible
+            command: |
+              # your code here              
+              apk add --update ansible 
+              ansible --version
         - run:
             name: Install aws
             command: |
-              # your code here
+              # your code here              
               curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
               unzip awscliv2.zip
               sudo ./aws/install
-              aws --version                              
+              aws --version               
         - run:
             name: Configure server
             command: |
