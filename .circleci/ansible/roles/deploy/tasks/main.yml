@@ -10,7 +10,7 @@
     path: /home/ubuntu/backend
     state: directory
 
-- name: Extract foo.tgz into /var/lib/foo
+- name: Extract 'artifact.tar.gz' into '/home/ubuntu/backend'
   ansible.builtin.unarchive:
     src: artifact.tar.gz
     dest: /home/ubuntu/backend
@@ -20,7 +20,6 @@
   shell: |   
     cd /home/ubuntu/backend
     npm install
-    npm build
-    cd ..    
+    npm run build   
     pm2 stop default
     pm2 start npm --name "backend" -- start

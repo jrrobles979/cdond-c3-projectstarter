@@ -35,10 +35,7 @@
 
     - name: check TYPEORM_HOST by ansible_env
       debug:
-        msg: "'{{ lookup('env', 'TYPEORM_HOST')}}' is the TYPEORM_HOST environment variable."
-
-    - name: check ansible_env.TYPEORM_HOST by ansible_env
-      shell: "echo $TYPEORM_HOST"  
+        msg: "'{{ lookup('env', 'TYPEORM_HOST')}}' is the TYPEORM_HOST environment variable."  
 
   roles:
     # Your code here
