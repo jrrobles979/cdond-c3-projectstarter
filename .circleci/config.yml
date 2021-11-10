@@ -11,7 +11,8 @@ commands:
           name: Destroy environments
           when: << parameters.event >>
           command: |
-            # Your code here
+            # Your code here            
+            aws s3 rm dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
             aws cloudformation delete-stack --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}"
             aws cloudformation delete-stack --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}"
 
@@ -43,10 +44,10 @@ commands:
           name: Update dependencies
           command: |
             # your code here
-            sudo apt update
+            sudo apt -y update && sudo apt -y upgrade
             sudo apt install software-properties-common
             sudo add-apt-repository --yes ppa:deadsnakes/ppa
-            sudo apt update
+            sudo apt -y update && sudo apt -y upgrade
 
       - run:
           name: Install python
@@ -66,9 +67,9 @@ commands:
           name: Install node
           command: |
             # your code here
-            sudo apt install curl
-            curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-            sudo apt install nodejs           
+            sudo apt install curl            
+            curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+            sudo apt install nodejs            
             node --version
             npm --version
 
@@ -296,39 +297,6 @@ jobs:
       - destroy-environment:
               event: on_fail
   
-  deploy-frontend:
-    docker:
-      # Docker image here that supports AWS CLI
-      - image: cimg/base:2021.04
-    steps:
-      # Checkout code from git
-      - checkout
-      - update-and-install-dependencies          
-      - run:
-          name: Get backend url
-          command: |
-            # your code here
-            export BACKEND_IP=$(aws ec2 describe-instances --query 'Reservations[0].Instances[0].PublicIpAddress' --filters Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7} --output text) 
-            export API_URL="http://${BACKEND_IP}:3030"
-            echo "${API_URL}"
-            echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
-            cat frontend/.env
-            
-      - run:
-          name: Deploy frontend objects
-          command: |
-            # your code here
-            cd frontend
-            npm install
-            npm run build
-            tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
-            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
-      # Here's where you will add some code to rollback on failure  
-      - revert-migrations:
-          event: on_fail
-      - destroy-environment:
-          event: on_fail
-  
   deploy-backend:
     docker:
       # Docker image here that supports Ansible
@@ -367,6 +335,39 @@ jobs:
             event: on_fail
       #  - destroy-environment:
       #      event: on_fail
+  
+  deploy-frontend:
+    docker:
+      # Docker image here that supports AWS CLI
+      - image: cimg/base:2021.04
+    steps:
+      # Checkout code from git
+      - checkout
+      - update-and-install-dependencies          
+      - run:
+          name: Get backend url
+          command: |
+            # your code here
+            export BACKEND_IP=$(aws ec2 describe-instances --query 'Reservations[0].Instances[0].PublicIpAddress' --filters Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7} --output text) 
+            export API_URL="http://${BACKEND_IP}:3030"
+            echo "${API_URL}"
+            echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
+            cat frontend/.env
+            
+      - run:
+          name: Deploy frontend objects
+          command: |
+            # your code here
+            cd frontend
+            npm install
+            npm run build
+            tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
+            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
+      # Here's where you will add some code to rollback on failure  
+      - revert-migrations:
+          event: on_fail
+      - destroy-environment:
+          event: on_fail
   
   smoke-test:
     docker:
@@ -409,7 +410,7 @@ jobs:
               if curl -s ${URL} | grep "Welcome"
               then
                   # Change this to 0 after the job fails
-                return 1
+                return 0
               else
                 return 1
               fi
