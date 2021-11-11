@@ -17,7 +17,9 @@ commands:
             # aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
             
             FRONTEND=$(curl -H "token: f8c96b04-eedf-4709-a46e-a229beb2abb0" --request GET https://api.memstash.io/values/frontend_${CIRCLE_WORKFLOW_ID:0:7})
-            if (( $FRONTEND == 1 ));
+            
+            echo $FRONTEND
+            if ( $FRONTEND == 1 );
             then
               echo "delete s3 'udapeople-${CIRCLE_WORKFLOW_ID:0:7}' content"
               aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
@@ -53,8 +55,9 @@ commands:
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable            
             SUCCESS=$(curl -H "token: f8c96b04-eedf-4709-a46e-a229beb2abb0" --request GET https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7})
-            if (( $SUCCESS == 1 ));
+            if ( $SUCCESS == 1 );
             then
+              echo "roll back migration"
               cd ~/project/backend
               npm install
               npm run migration:revert
@@ -285,6 +288,8 @@ jobs:
           name: Send migration results to memstash
           command: |
             # Your code here
+            MEMSTASH_URL = https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7}
+            echo $MEMSTASH_URL
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
               curl -H "Content-Type: text/plain" -H "token: f8c96b04-eedf-4709-a46e-a229beb2abb0" --request PUT --data "1" https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7}
@@ -480,27 +485,7 @@ jobs:
 workflows:
   default:
       jobs:
-        - build-frontend
-        - build-backend
-        - test-frontend:
-            requires: [build-frontend]
-        - test-backend:
-            requires: [build-backend]
-        - scan-backend:
-            requires: [build-backend]
-        - scan-frontend:
-            requires: [build-frontend]
-        - deploy-infrastructure:
-            requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-        - configure-infrastructure:
-            requires: [deploy-infrastructure]
-        - run-migrations:
-            requires: [configure-infrastructure]
-        - deploy-frontend:
-            requires: [run-migrations]
-        - deploy-backend:
-            requires: [run-migrations]
-        - smoke-tests:
-            requires: [deploy-backend, deploy-frontend]
-        
+       
+        - run-migrations
+       
        
