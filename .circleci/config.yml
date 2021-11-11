@@ -17,7 +17,7 @@ commands:
             # aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
             
             FRONTEND=$(curl -H "token: f8c96b04-eedf-4709-a46e-a229beb2abb0" --request GET https://api.memstash.io/values/frontend_${CIRCLE_WORKFLOW_ID:0:7})
-            if (( $SUCCESS == 1 ));
+            if (( $FRONTEND == 1 ));
             then
               echo "delete s3 'udapeople-${CIRCLE_WORKFLOW_ID:0:7}' content"
               aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
