@@ -46,7 +46,7 @@ commands:
               echo "roll back migration started"
               cd ~/project/backend
               npm install
-              npm run migration:revert
+              npm run migrations:revert
               echo "roll back migration completed"
             fi
              echo "Revert migrations finish..."
