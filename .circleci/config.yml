@@ -472,9 +472,9 @@ jobs:
               #fi
               return 1
         - revert-migrations:
-           event: on_fail
+            event: on_fail
         - destroy_environment:
-           event: on_fail
+            event: on_fail
 
   
 
