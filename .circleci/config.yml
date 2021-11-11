@@ -471,8 +471,10 @@ jobs:
               #  exit 1
               #fi
               return 1
-        - revert-migrations
-        - destroy_environment
+        - revert-migrations:
+           event: on_fail
+        - destroy_environment:
+           event: on_fail
 
   
 
