@@ -39,15 +39,17 @@ commands:
           when: << parameters.event >>
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable            
+            echo "Revert migrations started..."
             SUCCESS=$(curl -H "token: f8c96b04-eedf-4709-a46e-a229beb2abb0" --request GET https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7})
             if [[ $SUCCESS == 1 ]];
             then
-              echo "roll back migration"
+              echo "roll back migration started"
               cd ~/project/backend
               npm install
               npm run migration:revert
+              echo "roll back migration completed"
             fi
-            
+             echo "Revert migrations finish..."
 jobs:
   build-frontend:
     docker:
@@ -443,7 +445,7 @@ jobs:
               apk add unzip 
               apk add curl
               /usr/local/bin/python -m pip install --upgrade pip    
-              
+
         - run:
             name: Install node
             command: |
