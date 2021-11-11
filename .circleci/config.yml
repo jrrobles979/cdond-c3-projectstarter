@@ -412,7 +412,7 @@ jobs:
             curl -H "Content-Type: text/plain" -H "token: f8c96b04-eedf-4709-a46e-a229beb2abb0" --request PUT --data "1" https://api.memstash.io/values/frontend_${CIRCLE_WORKFLOW_ID:0:7}
 
   
-  smoke-test-backend:
+  smoke-tests:
     docker:
       # Lightweight Docker image 
        - image: python:3.7-alpine3.11
@@ -456,27 +456,7 @@ jobs:
               #    return 1
               #fi
               return 1       
-      # Here's where you will add some code to rollback on failure  
-        - revert-migrations
-        - destroy_environment
-        
-  smoke-test-frontend:
-    docker:
-      # Lightweight Docker image 
-        - image: python:3.7-alpine3.11
-    steps:
-      # Checkout code from git
-        - checkout
-        - add_ssh_keys:
-            fingerprints: ["13:16:5b:27:2b:2a:74:d5:8a:da:82:61:b9:73:27:10"] 
-        - attach_workspace:
-            at: ~/      
-        - run:
-            name: Install CURL 
-            command: |
-                apk update
-                apk upgrade
-                apk add curl      
+      # Here's where you will add some code to rollback on failure
         - run:
             name: Frontend smoke test.
             command: |
@@ -491,9 +471,10 @@ jobs:
               #  exit 1
               #fi
               return 1
-      # Here's where you will add some code to rollback on failure  
         - revert-migrations
         - destroy_environment
+
+  
 
 workflows:
   default:
