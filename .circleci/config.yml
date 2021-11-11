@@ -413,6 +413,11 @@ jobs:
                 apk update
                 apk upgrade
                 apk add curl
+        - run:
+            name: Install aws
+            command: |    
+              pip install awscli --upgrade   
+              aws --version       
             
         - run:
             name: Get backend url
