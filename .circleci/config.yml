@@ -407,7 +407,13 @@ jobs:
             fingerprints: ["13:16:5b:27:2b:2a:74:d5:8a:da:82:61:b9:73:27:10"] 
         - attach_workspace:
             at: ~/
-        
+        - run:
+            name: Install CURL 
+            command: |
+                apk update
+                apk upgrade
+                apk add curl
+            
         - run:
             name: Get backend url
             command: |
@@ -440,7 +446,13 @@ jobs:
         - add_ssh_keys:
             fingerprints: ["13:16:5b:27:2b:2a:74:d5:8a:da:82:61:b9:73:27:10"] 
         - attach_workspace:
-            at: ~/        
+            at: ~/      
+        - run:
+            name: Install CURL 
+            command: |
+                apk update
+                apk upgrade
+                apk add curl      
         - run:
             name: Frontend smoke test.
             command: |
