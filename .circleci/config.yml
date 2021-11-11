@@ -271,15 +271,26 @@ jobs:
   run-migrations:
     docker:
       # Docker image here that supports NodeJS
-      - image: circleci/node:13.8.0
+      - image: python:3.7-alpine3.11
     steps:
       # Checkout code from git
       - checkout
       - run:
-          name: update
-          command: |  
-            sudo apt update && sudo apt upgrade            
-            sudo apt install curl
+            name: Install dependencies
+            command: |
+              # Your code here
+              apk update
+              apk upgrade
+              apk add unzip 
+              apk add curl
+              /usr/local/bin/python -m pip install --upgrade pip    
+      - run:
+            name: Install node
+            command: |
+              apk add --update nodejs nodejs-npm
+              node --version
+              npm --version
+
       #- run:
       #    name: Run migrations
       #    command: |
