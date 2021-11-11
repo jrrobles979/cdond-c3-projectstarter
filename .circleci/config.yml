@@ -1,7 +1,6 @@
 version: 2.1
 
 commands:
-
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks and S3 bucket given a workflow ID.   
     parameters:
@@ -473,7 +472,7 @@ jobs:
               return 1
         - revert-migrations:
             event: on_fail
-        - destroy_environment:
+        - destroy-environment:
             event: on_fail
 
   
