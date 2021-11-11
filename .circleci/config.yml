@@ -24,19 +24,6 @@ commands:
             fi
             aws cloudformation delete-stack --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}"
             aws cloudformation delete-stack --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}"
-
-  empty-s3-bucket:
-    description: Clear elements from s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} 
-    parameters:
-      event:
-        type: string
-    steps:
-      - run:
-          name: Destroy environments
-          when: << parameters.event >>
-          command: |
-            # Your code here                        
-            aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
             
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.  
@@ -448,11 +435,21 @@ jobs:
         - attach_workspace:
             at: ~/
         - run:
-            name: Install CURL 
+            name: Install dependencies
             command: |
-                apk update
-                apk upgrade
-                apk add curl
+              # Your code here
+              apk update
+              apk upgrade
+              apk add unzip 
+              apk add curl
+              /usr/local/bin/python -m pip install --upgrade pip    
+              
+        - run:
+            name: Install node
+            command: |
+              apk add --update nodejs nodejs-npm
+              node --version
+              npm --version
         - run:
             name: Install aws
             command: |    
