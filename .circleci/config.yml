@@ -288,7 +288,7 @@ jobs:
           name: Send migration results to memstash
           command: |
             # Your code here
-            export MEMSTASH_URL:"https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7}"
+            MEMSTASH_URL = $(curl -H "Content-Type: text/plain" -H "token: f8c96b04-eedf-4709-a46e-a229beb2abb0" --request PUT --data "1" https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7})
             echo $MEMSTASH_URL
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
