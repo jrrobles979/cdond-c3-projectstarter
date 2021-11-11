@@ -17,7 +17,7 @@ commands:
             # aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
             
             FRONTEND=$(curl -H "token: f8c96b04-eedf-4709-a46e-a229beb2abb0" --request GET https://api.memstash.io/values/frontend_${CIRCLE_WORKFLOW_ID:0:7})
-            if (( $FRONTEND == 1 ));
+            if [[ $FRONTEND == 1 ]];
             then
               echo "delete s3 'udapeople-${CIRCLE_WORKFLOW_ID:0:7}' content"
               aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
@@ -53,7 +53,7 @@ commands:
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable            
             SUCCESS=$(curl -H "token: f8c96b04-eedf-4709-a46e-a229beb2abb0" --request GET https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7})
-            if (( $SUCCESS == 1 ));
+            if [[ $SUCCESS == 1 ]];
             then
               echo "roll back migration"
               cd ~/project/backend
@@ -304,8 +304,10 @@ jobs:
             # Your code here            
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
+              echo "migration successfull"
               curl -H "Content-Type: text/plain" -H "token: f8c96b04-eedf-4709-a46e-a229beb2abb0" --request PUT --data "1" https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7}
             else
+              echo "migration was not created"
               curl -H "Content-Type: text/plain" -H "token: f8c96b04-eedf-4709-a46e-a229beb2abb0" --request PUT --data "0" https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7}
             fi
      # Here's where you will add some code to rollback on failure
