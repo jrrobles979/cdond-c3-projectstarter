@@ -378,7 +378,13 @@ jobs:
      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
-      - checkout     
+      - checkout
+      - run:
+          name: update
+          command: |  
+            sudo apt update && sudo apt upgrade            
+            sudo apt install curl
+
       - run:
           name: Install aws
           command: |                        
