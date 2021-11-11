@@ -291,22 +291,19 @@ jobs:
               node --version
               npm --version
 
-      #- run:
-      #    name: Run migrations
-      #    command: |
-      #      # Your code here
-      #      cd backend
-      #      npm install
-      #      # Run and sve the migration output
-      #      npm run migrations > migrations_dump.txt
-      #      echo `cat migrations_dump.txt`
+      - run:
+          name: Run migrations
+          command: |
+            # Your code here
+            cd backend
+            npm install
+            # Run and sve the migration output
+            npm run migrations > migrations_dump.txt
+            echo `cat migrations_dump.txt`
       - run:
           name: Send migration results to memstash
           command: |
-            # Your code here
-            echo "https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7}"
-            curl -H "Content-Type: text/plain" -H "token: f8c96b04-eedf-4709-a46e-a229beb2abb0" --request PUT --data "1" https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7}
-           
+            # Your code here            
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
               curl -H "Content-Type: text/plain" -H "token: f8c96b04-eedf-4709-a46e-a229beb2abb0" --request PUT --data "1" https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7}
