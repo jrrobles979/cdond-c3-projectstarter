@@ -531,8 +531,9 @@ workflows:
                     only: dev-branch           
         - build-backend:
              filters:
-              branches:
-                only: dev-branch
+              branches: 
+                  only: [ dev-branch, master]
+                  
         - test-frontend:
             filters:
               branches:
