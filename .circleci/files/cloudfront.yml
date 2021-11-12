@@ -5,6 +5,10 @@ Parameters:
   WorkflowID:
     Description: Unique identifier.
     Type: String
+  
+  OldWorkflowID:
+    Description: Old Workflow Unique identifier.
+    Type: String
 
 
 Resources:
