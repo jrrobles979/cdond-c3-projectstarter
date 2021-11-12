@@ -527,28 +527,65 @@ workflows:
       jobs:
         - build-frontend:
             filters:
+                  branches:
+                    only: dev-branch           
+        - build-backend:
+             filters:
               branches:
                 only: dev-branch
-        - build-backend
         - test-frontend:
+            filters:
+              branches:
+                only: dev-branch
             requires: [build-frontend]
         - test-backend:
+            filters:
+              branches:
+                only: dev-branch
             requires: [build-backend]
         - scan-backend:
+            filters:
+              branches:
+                only: dev-branch
             requires: [build-backend]
         - scan-frontend:
+            filters:
+              branches:
+                only: dev-branch
             requires: [build-frontend]
         - deploy-infrastructure:
+            filters:
+                  branches:
+                    only: master
             requires: [test-frontend, test-backend, scan-frontend, scan-backend]
         - configure-infrastructure:
+            filters:
+                  branches:
+                    only: master
             requires: [deploy-infrastructure]
         - run-migrations:
+            filters:
+                  branches:
+                    only: master
             requires: [configure-infrastructure]
         - deploy-frontend:
+            filters:
+                  branches:
+                    only: master
             requires: [run-migrations]
         - deploy-backend:
+            filters:
+                  branches:
+                    only: master
             requires: [run-migrations]
         - smoke-tests:
+            filters:
+                  branches:
+                    only: master
             requires: [deploy-backend, deploy-frontend]
-       
+        - cloudfront-update:
+            filters:
+                  branches:
+                    only: master
+            requires: [smoke-tests]
        
