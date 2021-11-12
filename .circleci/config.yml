@@ -55,9 +55,8 @@ jobs:
   build-frontend:
     filters:
       branches:
-        only:
-          - dev-branch
-          - master
+        only: dev-branch
+          
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -79,9 +78,8 @@ jobs:
   build-backend:
     filters:
       branches:
-        only:
-          - dev-branch
-          - master
+        only: dev-branch
+          
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -103,9 +101,8 @@ jobs:
   test-frontend:
       filters:
           branches:
-            only:
-              - dev-branch
-              - master
+            only: dev-branch
+             
       docker:
         # Docker image here
          - image: circleci/node:13.8.0
@@ -126,9 +123,8 @@ jobs:
   test-backend:
     filters:
       branches:
-        only:
-          - dev-branch
-          - master
+        only: dev-branch
+          
     docker:
       # Docker image here
         - image: circleci/node:13.8.0
@@ -149,9 +145,8 @@ jobs:
   scan-frontend:
     filters:
       branches:
-        only:
-          - dev-branch
-          - master
+        only: dev-branch
+          
     docker:
       # Docker image here
        - image: circleci/node:13.8.0
@@ -172,10 +167,9 @@ jobs:
 
   scan-backend:
     filters:
-        branches:
-          only:
-            - dev-branch
-            - master
+      branches:
+        only: dev-branch
+
     docker:
       # Docker image here
        - image: circleci/node:13.8.0
@@ -198,8 +192,7 @@ jobs:
   deploy-infrastructure:
     filters:
       branches:
-        only:         
-          - master
+        only: master
     docker:
       # Docker image here that supports AWS CLI
         - image: amazon/aws-cli
@@ -244,8 +237,7 @@ jobs:
   configure-infrastructure:
     filters:
         branches:
-          only:           
-            - master
+          only: master
     docker:
         # Docker image here that supports Ansible
         - image: python:3.7-alpine3.11
@@ -297,8 +289,7 @@ jobs:
   run-migrations:
     filters:
       branches:
-        only:          
-          - master
+        only: master
     docker:
       # Docker image here that supports NodeJS
       - image: python:3.7-alpine3.11
@@ -349,8 +340,8 @@ jobs:
   deploy-backend:
     filters:
       branches:
-        only:          
-          - master
+        only: master
+
     docker:
       # Docker image here that supports Ansible
       - image: python:3.7-alpine3.11
@@ -425,8 +416,8 @@ jobs:
   deploy-frontend:
     filters:
         branches:
-          only:            
-            - master
+          only: master
+
     docker:
       # Docker image here that supports AWS CLI
      - image: circleci/node:13.8.0
@@ -478,8 +469,8 @@ jobs:
   smoke-tests:
     filters:
         branches:
-          only:            
-            - master
+          only: master
+
     docker:
       # Lightweight Docker image 
        - image: python:3.7-alpine3.11
@@ -556,8 +547,8 @@ jobs:
   cloudfront-update:
       filters:
         branches:
-          only:
-            - master
+          only: master
+          
       docker:
         # Docker image here that supports AWS CLI
         - image: amazon/aws-cli
