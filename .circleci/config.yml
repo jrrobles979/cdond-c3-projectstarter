@@ -550,7 +550,7 @@ jobs:
             # You can use any condition like:
             # if [[ "${CIRCLE_WORKFLOW_ID:0:7}" != "${OldWorkflowID}" ]]
             # if [[ "${OldWorkflowID}" =~ "${STACKS[@]}"  ]]
-            if [[ "${CIRCLE_WORKFLOW_ID:0:7}" =~ "${OldWorkflowID}" ]] || [ "$fname" = "c.txt" ]
+            if [[ "${CIRCLE_WORKFLOW_ID:0:7}" =~ "${OldWorkflowID}" ]] 
             then
             # your code goes here
               aws cloudformation update-stack \
