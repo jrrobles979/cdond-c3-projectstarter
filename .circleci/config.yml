@@ -50,13 +50,8 @@ commands:
               echo "roll back migration completed"
             fi
              echo "Revert migrations finish..."
-
 jobs:
   build-frontend:
-    filters:
-      branches:
-        only: dev-branch
-          
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -76,10 +71,6 @@ jobs:
           key: frontend-build
 
   build-backend:
-    filters:
-      branches:
-        only: dev-branch
-          
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -99,10 +90,6 @@ jobs:
           key: backend-build
 
   test-frontend:
-      filters:
-          branches:
-            only: dev-branch
-             
       docker:
         # Docker image here
          - image: circleci/node:13.8.0
@@ -121,10 +108,6 @@ jobs:
               npm run test
                 
   test-backend:
-    filters:
-      branches:
-        only: dev-branch
-          
     docker:
       # Docker image here
         - image: circleci/node:13.8.0
@@ -143,10 +126,6 @@ jobs:
               npm run test
   
   scan-frontend:
-    filters:
-      branches:
-        only: dev-branch
-          
     docker:
       # Docker image here
        - image: circleci/node:13.8.0
@@ -166,10 +145,6 @@ jobs:
               npm audit --audit-level=critical
 
   scan-backend:
-    filters:
-      branches:
-        only: dev-branch
-
     docker:
       # Docker image here
        - image: circleci/node:13.8.0
@@ -190,9 +165,6 @@ jobs:
               npm audit --audit-level=critical
 
   deploy-infrastructure:
-    filters:
-      branches:
-        only: master
     docker:
       # Docker image here that supports AWS CLI
         - image: amazon/aws-cli
@@ -235,9 +207,6 @@ jobs:
             event: on_fail
   
   configure-infrastructure:
-    filters:
-        branches:
-          only: master
     docker:
         # Docker image here that supports Ansible
         - image: python:3.7-alpine3.11
@@ -287,9 +256,6 @@ jobs:
               event: on_fail
   
   run-migrations:
-    filters:
-      branches:
-        only: master
     docker:
       # Docker image here that supports NodeJS
       - image: python:3.7-alpine3.11
@@ -338,10 +304,6 @@ jobs:
               event: on_fail
   
   deploy-backend:
-    filters:
-      branches:
-        only: master
-
     docker:
       # Docker image here that supports Ansible
       - image: python:3.7-alpine3.11
@@ -414,10 +376,6 @@ jobs:
             event: on_fail
   
   deploy-frontend:
-    filters:
-        branches:
-          only: master
-
     docker:
       # Docker image here that supports AWS CLI
      - image: circleci/node:13.8.0
@@ -467,10 +425,6 @@ jobs:
             curl -H "Content-Type: text/plain" -H "token: f8c96b04-eedf-4709-a46e-a229beb2abb0" --request PUT --data "1" https://api.memstash.io/values/frontend_${CIRCLE_WORKFLOW_ID:0:7}
 
   smoke-tests:
-    filters:
-        branches:
-          only: master
-
     docker:
       # Lightweight Docker image 
        - image: python:3.7-alpine3.11
@@ -545,10 +499,6 @@ jobs:
             event: on_fail
 
   cloudfront-update:
-      filters:
-        branches:
-          only: master
-          
       docker:
         # Docker image here that supports AWS CLI
         - image: amazon/aws-cli
@@ -566,19 +516,19 @@ jobs:
             command: |
               # your code here
               aws cloudformation deploy \
-                  --template-file .circleci/files/cloudfront.yml \
-                  --stack-name InitialStack \
-                  --parameter-overrides WorkflowID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}" \
-                  --tags project=udapeople
+                --template-file .circleci/files/cloudfront.yml \
+                --stack-name InitialStack \
+                --parameter-overrides WorkflowID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}" \
+                --tags project=udapeople
         # Here's where you will add some code to rollback on failure    
-
-
-
 
 workflows:
   default:
       jobs:
-        - build-frontend
+        - build-frontend:
+            filters:
+              branches:
+                only: dev-branch
         - build-backend
         - test-frontend:
             requires: [build-frontend]
@@ -600,7 +550,5 @@ workflows:
             requires: [run-migrations]
         - smoke-tests:
             requires: [deploy-backend, deploy-frontend]
-        - cloudfront-update:
-            requires: [smoke-testa]
        
        
