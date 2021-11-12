@@ -33,10 +33,6 @@
       raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python3)
       changed_when: false
 
-    - name: check TYPEORM_HOST by ansible_env
-      debug:
-        msg: "'{{ lookup('env', 'TYPEORM_HOST')}}' is the TYPEORM_HOST environment variable."  
-
   roles:
     # Your code here
     - configure-server

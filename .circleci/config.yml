@@ -237,11 +237,7 @@ jobs:
         - run:
             name: Install aws
             command: |
-              # your code here              
-              # curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-              # unzip awscliv2.zip
-              # ./aws/install -i /usr/local/aws -b /usr/local/bin/aws
-              # aws --version        
+              # your code here                           
               pip install awscli --upgrade   
               aws --version       
         - run:
@@ -250,6 +246,12 @@ jobs:
               # Your code here 
               cd .circleci/ansible/ 
               ansible-playbook -i inventory.txt configure-server.yml
+        
+        - run:
+            name: Install node_exporter
+            command: 
+              cd .circleci/ansible/
+              ansible-playbook -i inventory.txt add-node-exporter.yml
               
         # Here's where you will add some code to rollback on failure   
         - destroy-environment:
@@ -594,30 +596,4 @@ workflows:
                   branches:
                     only: master
             requires: [deploy-infrastructure]
-        - run-migrations:
-            filters:
-                  branches:
-                    only: master
-            requires: [configure-infrastructure]
-        - deploy-frontend:
-            filters:
-                  branches:
-                    only: master
-            requires: [run-migrations]
-        - deploy-backend:
-            filters:
-                  branches:
-                    only: master
-            requires: [run-migrations]
-        - smoke-tests:
-            filters:
-                  branches:
-                    only: master
-            requires: [deploy-backend, deploy-frontend]
-        - cloudfront-update:
-            filters:
-                  branches:
-                    only: master
-            requires: [smoke-tests]
-        - cleanup:
-            requires: [cloudfront-update]
+        
