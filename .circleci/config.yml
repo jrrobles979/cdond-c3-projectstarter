@@ -50,8 +50,14 @@ commands:
               echo "roll back migration completed"
             fi
              echo "Revert migrations finish..."
+
 jobs:
   build-frontend:
+    filters:
+      branches:
+        only:
+          - dev-branch
+          - master
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -71,6 +77,11 @@ jobs:
           key: frontend-build
 
   build-backend:
+    filters:
+      branches:
+        only:
+          - dev-branch
+          - master
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -90,6 +101,11 @@ jobs:
           key: backend-build
 
   test-frontend:
+      filters:
+          branches:
+            only:
+              - dev-branch
+              - master
       docker:
         # Docker image here
          - image: circleci/node:13.8.0
@@ -108,6 +124,11 @@ jobs:
               npm run test
                 
   test-backend:
+    filters:
+      branches:
+        only:
+          - dev-branch
+          - master
     docker:
       # Docker image here
         - image: circleci/node:13.8.0
@@ -126,6 +147,11 @@ jobs:
               npm run test
   
   scan-frontend:
+    filters:
+      branches:
+        only:
+          - dev-branch
+          - master
     docker:
       # Docker image here
        - image: circleci/node:13.8.0
@@ -145,6 +171,11 @@ jobs:
               npm audit --audit-level=critical
 
   scan-backend:
+    filters:
+        branches:
+          only:
+            - dev-branch
+            - master
     docker:
       # Docker image here
        - image: circleci/node:13.8.0
@@ -165,6 +196,10 @@ jobs:
               npm audit --audit-level=critical
 
   deploy-infrastructure:
+    filters:
+      branches:
+        only:         
+          - master
     docker:
       # Docker image here that supports AWS CLI
         - image: amazon/aws-cli
@@ -207,6 +242,10 @@ jobs:
             event: on_fail
   
   configure-infrastructure:
+    filters:
+        branches:
+          only:           
+            - master
     docker:
         # Docker image here that supports Ansible
         - image: python:3.7-alpine3.11
@@ -256,6 +295,10 @@ jobs:
               event: on_fail
   
   run-migrations:
+    filters:
+      branches:
+        only:          
+          - master
     docker:
       # Docker image here that supports NodeJS
       - image: python:3.7-alpine3.11
@@ -304,6 +347,10 @@ jobs:
               event: on_fail
   
   deploy-backend:
+    filters:
+      branches:
+        only:          
+          - master
     docker:
       # Docker image here that supports Ansible
       - image: python:3.7-alpine3.11
@@ -376,6 +423,10 @@ jobs:
             event: on_fail
   
   deploy-frontend:
+    filters:
+        branches:
+          only:            
+            - master
     docker:
       # Docker image here that supports AWS CLI
      - image: circleci/node:13.8.0
@@ -424,8 +475,11 @@ jobs:
           command: |
             curl -H "Content-Type: text/plain" -H "token: f8c96b04-eedf-4709-a46e-a229beb2abb0" --request PUT --data "1" https://api.memstash.io/values/frontend_${CIRCLE_WORKFLOW_ID:0:7}
 
-  
   smoke-tests:
+    filters:
+        branches:
+          only:            
+            - master
     docker:
       # Lightweight Docker image 
        - image: python:3.7-alpine3.11
@@ -472,13 +526,13 @@ jobs:
               echo $BACKEND_IP
               export API_URL="http://${BACKEND_IP}:3030"
               echo "${API_URL}"
-              #if curl "${API_URL}/api/status" | grep "ok"
-              #then
-              #    return 0
-              #else
-              #    return 1
-              #fi
-              return 1       
+              if curl "${API_URL}/api/status" | grep "ok"
+              then
+                  return 0
+              else
+                  return 1
+              fi
+             
       # Here's where you will add some code to rollback on failure
         - run:
             name: Frontend smoke test.
@@ -489,17 +543,46 @@ jobs:
               if curl -s ${URL} | grep "Welcome"
               #then
                   # Change this to 0 after the job fails
-              #  exit 0
-              #else
-              #  exit 1
-              #fi
-              return 1
+                return 0
+              else
+                return 1
+              fi
+             
         - revert-migrations:
             event: on_fail
         - destroy-environment:
             event: on_fail
 
-  
+  cloudfront-update:
+      filters:
+        branches:
+          only:
+            - master
+      docker:
+        # Docker image here that supports AWS CLI
+        - image: amazon/aws-cli
+      steps:
+        # Checkout code from git
+        - checkout
+        - run: yum -y install tar gzip
+        - run:
+            name: Install dependencies
+            command: |
+              # your code here
+
+        - run:
+            name: Update cloudfront distribution
+            command: |
+              # your code here
+              aws cloudformation deploy \
+                  --template-file .circleci/files/cloudfront.yml \
+                  --stack-name InitialStack \
+                  --parameter-overrides WorkflowID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}" \
+                  --tags project=udapeople
+        # Here's where you will add some code to rollback on failure    
+
+
+
 
 workflows:
   default:
