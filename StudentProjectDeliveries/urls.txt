@@ -3,7 +3,7 @@ GitHub [URL01]
 https://github.com/jrrobles979/cdond-c3-projectstarter
 
 S3 Bucket [URL02]:
-http://udapeople-84e21cd.s3-website-us-east-1.amazonaws.com/#/employees
+http://udapeople-ed6c2df.s3-website-us-east-1.amazonaws.com/
 
 Prometheus [URL03]
 http://ec2-54-242-108-165.compute-1.amazonaws.com:9090/targets
