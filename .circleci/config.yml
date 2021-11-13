@@ -522,13 +522,17 @@ jobs:
               #  list-exports --query "Exports[?Name==\`OldWorkflowID\`].Value" \
               #  --no-paginate --output text)
 
-              export OldWorkflowID=${$(aws cloudformation \
-                list-exports --query "Exports[?Name==\`OldWorkflowID\`].Value" \                
-                --no-paginate --output text --profile UdagramAdmin)#udapeople-}
+              export OldWorkflowID=$(aws cloudformation \
+              list-exports --query "Exports[?Name==\`OldWorkflowID\`].Value" \                
+              --no-paginate --output text)
+              
+              OldWorkflowID=${OldWorkflowID#udapeople-}
 
-              export CurrentWorkflowID=${$(aws cloudformation \
-                list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \                
-                --no-paginate --output text --profile UdagramAdmin)#udapeople-}
+              export CurrentWorkflowID=$(aws cloudformation \
+              list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \                
+              --no-paginate --output text)
+              
+              CurrentWorkflowID=${CurrentWorkflowID#udapeople-}
 
               echo CurrentWorkflowID: "${CurrentWorkflowID}"
               echo newWorkFlowId: "${CIRCLE_WORKFLOW_ID:0:7}"
@@ -562,7 +566,7 @@ jobs:
             # your code here
             export OldWorkflowID=${$(aws cloudformation \
                 list-exports --query "Exports[?Name==\`OldWorkflowID\`].Value" \                
-                --no-paginate --output text --profile UdagramAdmin)#udapeople-}
+                --no-paginate --output text )#udapeople-}
 
             echo OldWorkflowID: "${OldWorkflowID}"
 
@@ -638,9 +642,9 @@ workflows:
                     only: master
             requires: [configure-infrastructure]
         
-        - cleanup:
-            filters:
-                  branches:
-                    only: master
-            requires: [cloudfront-update]
+     #   - cleanup:
+     #       filters:
+     #             branches:
+     #               only: master
+     #       requires: [cloudfront-update]
         
