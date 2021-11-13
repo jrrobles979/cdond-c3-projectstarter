@@ -567,7 +567,7 @@ jobs:
             # if [[ "${CIRCLE_WORKFLOW_ID:0:7}" != "${OldWorkflowID}" ]]
             # if [[ "${OldWorkflowID}" =~ "${STACKS[@]}"  ]]
             # if [[ "${CIRCLE_WORKFLOW_ID:0:7}" =~ "${OldWorkflowID}" ]]
-            
+
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
             then
                 # your code goes here
@@ -611,25 +611,41 @@ workflows:
               branches: 
                   only: [ dev-branch, master]
             requires: [build-frontend]
-
         - deploy-infrastructure:
             filters:
                   branches:
                     only: master
             requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-
         - configure-infrastructure:
             filters:
                   branches:
                     only: master
             requires: [deploy-infrastructure]
-
-        - cloudfront-update:
+        - run-migrations:
             filters:
                   branches:
                     only: master
             requires: [configure-infrastructure]
-        
+        - deploy-frontend:
+            filters:
+                  branches:
+                    only: master
+            requires: [run-migrations]
+        - deploy-backend:
+            filters:
+                  branches:
+                    only: master
+            requires: [run-migrations]
+        - smoke-tests:
+            filters:
+                  branches:
+                    only: master
+            requires: [deploy-backend, deploy-frontend]
+        - cloudfront-update:
+            filters:
+                  branches:
+                    only: master
+            requires: [smoke-tests]
         - cleanup:
             filters:
                   branches:
