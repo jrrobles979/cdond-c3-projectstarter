@@ -6,4 +6,4 @@ S3 Bucket [URL02]:
 http://udapeople-84e21cd.s3-website-us-east-1.amazonaws.com/#/employees
 
 Prometheus [URL03]
-http://ec2-54-89-159-243.compute-1.amazonaws.com:9090/targets
+http://ec2-54-242-108-165.compute-1.amazonaws.com:9090/targets
