@@ -517,10 +517,35 @@ jobs:
             name: Update cloudfront distribution
             command: |
               # your code here
+
+              #export OldWorkflowID=$(aws cloudformation \
+              #  list-exports --query "Exports[?Name==\`OldWorkflowID\`].Value" \
+              #  --no-paginate --output text)
+
+              export OldWorkflowID=${$(aws cloudformation \
+                list-exports --query "Exports[?Name==\`OldWorkflowID\`].Value" \                
+                --no-paginate --output text --profile UdagramAdmin)#udapeople-}
+
+              export CurrentWorkflowID=${$(aws cloudformation \
+                list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \                
+                --no-paginate --output text --profile UdagramAdmin)#udapeople-}
+
+              echo CurrentWorkflowID: "${CurrentWorkflowID}"
+              echo newWorkFlowId: "${CIRCLE_WORKFLOW_ID:0:7}"
+              echo OldWorkflowID: "${OldWorkflowID}"  
+                   
+              if [[ $OldWorkflowID = EMPTY ]] 
+              then             
+                echo "Oldworkflow is InitialStack"
+                OldWorkflowID="${CIRCLE_WORKFLOW_ID:0:7}"                
+              else
+                OldWorkflowID=$CurrentWorkflowID
+              fi
+              
               aws cloudformation deploy \
                 --template-file .circleci/files/cloudfront.yml \
                 --stack-name InitialStack \
-                --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \
+                --parameter-overrides WorkflowID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}" OldWorkflowID="${OldWorkflowID}" \
                 --tags project=udapeople
         # Here's where you will add some code to rollback on failure
   
@@ -535,11 +560,14 @@ jobs:
           name: Get old stack workflow id
           command: |
             # your code here
-            export OldWorkflowID=$(aws cloudformation \
-            list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
-              --no-paginate --output text)
+            export OldWorkflowID=${$(aws cloudformation \
+                list-exports --query "Exports[?Name==\`OldWorkflowID\`].Value" \                
+                --no-paginate --output text --profile UdagramAdmin)#udapeople-}
+
             echo OldWorkflowID: "${OldWorkflowID}"
+
             echo CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID:0:7}"
+            
             # Fetch the stack names          
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
               --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
@@ -552,15 +580,10 @@ jobs:
             # if [[ "${OldWorkflowID}" =~ "${STACKS[@]}"  ]]
             if [[ "${CIRCLE_WORKFLOW_ID:0:7}" =~ "${OldWorkflowID}" ]] 
             then
-            # your code goes here
-              aws cloudformation update-stack \
-                --use-previous-template \
-                --stack-name InitialStack \
-                --parameters ParameterKey=WorkflowID,ParameterValue="44444"
-            else
+                # your code goes here
                 aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
                 aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID}"
-                aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
+                aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"                            
             fi
 
 
@@ -596,14 +619,28 @@ workflows:
               branches: 
                   only: [ dev-branch, master]
             requires: [build-frontend]
+
         - deploy-infrastructure:
             filters:
                   branches:
                     only: master
             requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+
         - configure-infrastructure:
             filters:
                   branches:
                     only: master
             requires: [deploy-infrastructure]
+
+        - cloudfront-update:
+            filters:
+                  branches:
+                    only: master
+            requires: [configure-infrastructure]
+        
+        - cleanup:
+            filters:
+                  branches:
+                    only: master
+            requires: [cloudfront-update]
         
